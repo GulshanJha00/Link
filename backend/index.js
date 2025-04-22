@@ -13,22 +13,17 @@ const io = new Server(server, {
 app.use(cors({
     origin: "http://localhost:3000"
 }))
-
-
-
-app.get('/', (req, res) => {
-  res.send('<h1>Hello world</h1>');
-});
-
-
-
 io.on('connection', (socket) => {
+  socket.on("join_room",(msg)=>{
+    socket.join(msg.roomId)
+  })
     socket.on('chatmessage', (msg) => {
-      console.log('message: ' + msg);
-      socket.join(msg.roomId.id)
-      console.log(msg.message)
-      console.log(msg.roomId.id)
-      socket.emit("new_message",msg.message)
+      console.log(msg.roomId)
+      if(msg.message){
+        console.log(msg.message)
+        console.log("Emmitting to frontend ")
+        io.to(msg.roomId).emit("new_message",msg.message)
+      }
     });
 });
 
