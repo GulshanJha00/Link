@@ -21,9 +21,14 @@ app.get('/', (req, res) => {
 });
 
 
+
 io.on('connection', (socket) => {
     socket.on('chatmessage', (msg) => {
       console.log('message: ' + msg);
+      socket.join(msg.roomId.id)
+      console.log(msg.message)
+      console.log(msg.roomId.id)
+      socket.emit("new_message",msg.message)
     });
 });
 
