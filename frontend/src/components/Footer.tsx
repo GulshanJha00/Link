@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
@@ -13,38 +14,37 @@ const Footer = () => {
         </div>
 
         <div className="flex space-x-8">
-          <a href="#about" className="text-gray-400 hover:text-white transition duration-300">About</a>
-          <a href="#features" className="text-gray-400 hover:text-white transition duration-300">Features</a>
-          <a href="#contact" className="text-gray-400 hover:text-white transition duration-300">Contact</a>
-          <a href="#privacy" className="text-gray-400 hover:text-white transition duration-300">Privacy</a>
+          <Link href="#about" className="text-gray-400 hover:text-white transition duration-300">About</Link>
+          <Link href="#features" className="text-gray-400 hover:text-white transition duration-300">Features</Link>
+          <Link href="#contact" className="text-gray-400 hover:text-white transition duration-300">Contact</Link>
         </div>
 
         {/* Right side: Social Icons */}
         <div className="flex space-x-6">
-          <a
+          <Link
             href="https://github.com/GulshanJha00"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-white transition duration-300"
           >
             <FaGithub size={20} />
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://x.com/GulshanJha0"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-white transition duration-300"
           >
             <FaTwitter size={20} />
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://www.linkedin.com/in/gulshankumar0/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-white transition duration-300"
           >
             <FaLinkedin size={20} />
-          </a>
+          </Link>
         </div>
       </div>
 

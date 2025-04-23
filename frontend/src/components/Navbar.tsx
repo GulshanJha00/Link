@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,9 +14,9 @@ const Navbar = () => {
         </h1>
 
         <nav className="hidden md:flex space-x-8 items-center text-sm font-medium">
-          <a href="/home" className="hover:text-yellow-400 transition">Home</a>
-          <a href="#features" className="hover:text-yellow-400 transition">Features</a>
-          <a href="#contact" className="hover:text-yellow-400 transition">Contact</a>
+          <Link href="/home" className="hover:text-yellow-400 transition">Home</Link>
+          <Link href="#features" className="hover:text-yellow-400 transition">Features</Link>
+          <Link href="#contact" className="hover:text-yellow-400 transition">Contact</Link>
           <button className="bg-yellow-400 text-black px-4 py-2 rounded-md hover:bg-yellow-300 cursor-pointer transition font-semibold">
             Get Started
           </button>
@@ -32,9 +33,9 @@ const Navbar = () => {
       {/* Mobile dropdown */}
       {isOpen && (
         <div className="md:hidden px-6 pb-4 space-y-3 bg-gray-900 text-sm font-medium">
-          <a href="#home" className="block hover:text-yellow-400">Home</a>
-          <a href="#features" className="block hover:text-yellow-400">Features</a>
-          <a href="#contact" className="block hover:text-yellow-400">Contact</a>
+          <Link href="#home" className="block hover:text-yellow-400">Home</Link>
+          <Link href="#features" className="block hover:text-yellow-400">Features</Link>
+          <Link href="#contact" className="block hover:text-yellow-400">Contact</Link>
           <button className="w-full bg-yellow-400 text-black px-4 py-2 rounded-md hover:bg-yellow-300 transition font-semibold mt-2">
             Get Started
           </button>
