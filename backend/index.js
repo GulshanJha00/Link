@@ -17,6 +17,9 @@ app.use(cors({
 app.use(express.json()); 
 app.use(router)
 
+app.get("/",(req,res)=>{
+  res.send("Running")
+})
 io.on('connection', (socket) => {
   socket.on("join_room",(msg)=>{
     socket.join(msg.roomId)
