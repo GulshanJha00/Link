@@ -7,12 +7,12 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
     cors: {
-      origin: "https://cheated.vercel.app/",
+      origin: "https://cheated.vercel.app",
       methods: ["GET", "POST"],
     },
   });
 app.use(cors({
-    origin: "https://cheated.vercel.app/"
+    origin: "https://cheated.vercel.app"
 }))
 app.use(express.json()); 
 app.use(router)
