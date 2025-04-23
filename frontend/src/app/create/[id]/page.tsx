@@ -9,7 +9,7 @@ import React, { useState, useCallback, useRef, useEffect } from "react";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3001");
+const socket = io("https://cheated-backend.onrender.com");
 
 const Page = () => {
   const params = useParams();
@@ -79,7 +79,7 @@ const Page = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3001/gemini", {
+      const response = await axios.post("https://cheated-backend.onrender.com/gemini", {
         message: values,
         language: selectedLanguage,
       });
