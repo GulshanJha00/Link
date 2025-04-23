@@ -22,7 +22,7 @@ const Footer = () => {
         {/* Right side: Social Icons */}
         <div className="flex space-x-6">
           <a
-            href="https://github.com/your-repo"
+            href="https://github.com/GulshanJha00"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-white transition duration-300"
@@ -30,7 +30,7 @@ const Footer = () => {
             <FaGithub size={20} />
           </a>
           <a
-            href="https://twitter.com/your-profile"
+            href="https://x.com/GulshanJha0"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-white transition duration-300"
@@ -38,7 +38,7 @@ const Footer = () => {
             <FaTwitter size={20} />
           </a>
           <a
-            href="https://linkedin.com/in/your-profile"
+            href="https://www.linkedin.com/in/gulshankumar0/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-white transition duration-300"
