@@ -42,7 +42,7 @@ const Page = () => {
           </h1>
           <p> YOU KNOW WHAT TO DO.</p>
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-6 text-[#F9DC5C]">
-            Share your code with a single link. Clean, fast, and developer-first. Built for devs who want to get stuff DONE. No fluff, just code. Whether you're collaborating, learning, or showing off, Lynked doesn't waste your time.
+            Share your code with a single link. Clean, fast, and developer-first. Built for devs who want to get stuff DONE. No fluff, just code. Whether you&apos;re collaborating, learning, or showing off, Lynked doesn&apos;t waste your time.
           </p>
 
           {/* Primary CTA */}
