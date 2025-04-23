@@ -89,8 +89,8 @@ const Page = () => {
             }}
           />
       </div>
-      <div  className="w-full p-4 bg-gray-900 text-white rounded-lg mb-4">
-        <h2 className="text-lg font-bold">Output:</h2>
+      <div  className="w-full p-4 bg-gray-900 text-white mb-4">
+        <h2 className="text-lg text-(--yellow) font-bold">Output:</h2>
         <pre className="whitespace-pre-wrap break-words">{output}</pre>
       </div>
     </div>
