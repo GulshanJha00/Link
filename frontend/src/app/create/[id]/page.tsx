@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
 import { Editor } from "@monaco-editor/react";
 import { useParams } from "next/navigation";
 import React, { useState, useCallback, useRef, useEffect } from "react";
@@ -60,40 +61,12 @@ const Page = () => {
     debouncedEmit(safeVal);
   };
 
-  const handleRunCode = () => {
-    setTimeout(() => {
-      setOutput(`Output for code: ${values}`); 
 
-    }, 500);
-  };
-
-  // Help button click handler (for Gemini integration)
-  const handleHelpClick = () => {
-    alert("Gemini integration help.");
-  };
 
   return (
     <div className="min-h-screen bg-gray-800 flex flex-col">
-      {/* Navbar */}
-      <nav className="bg-gray-900 p-4 shadow-md sticky top-0 z-10">
-        <div className="flex justify-between items-center">
-          <h1 className="text-white text-xl">Cheated - Code Sharing</h1>
-          <div className="space-x-4">
-            <button
-              onClick={handleRunCode}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-            >
-              Run
-            </button>
-            <button
-              onClick={handleHelpClick}
-              className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
-            >
-              Help
-            </button>
-          </div>
-        </div>
-      </nav>
+      <Navbar/>
+     
 
         <div className="w-full  rounded-lg shadow-md">
           <Editor
