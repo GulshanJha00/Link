@@ -2,6 +2,7 @@ const express = require('express');
 const { createServer } = require('node:http');
 const { Server } = require('socket.io');
 var cors = require('cors')
+const router = require("./routes/route")
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
@@ -13,6 +14,9 @@ const io = new Server(server, {
 app.use(cors({
     origin: "http://localhost:3000"
 }))
+app.use(express.json()); 
+app.use(router)
+
 io.on('connection', (socket) => {
   socket.on("join_room",(msg)=>{
     socket.join(msg.roomId)
@@ -21,7 +25,6 @@ io.on('connection', (socket) => {
       console.log(msg.roomId)
       if(msg.message){
         console.log(msg.message)
-        console.log("Emmitting to frontend ")
         io.to(msg.roomId).emit("new_message",msg.message)
       }
     });
