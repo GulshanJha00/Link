@@ -10,12 +10,12 @@ const gemini = async (req, res) => {
   try{
     const response = await ai.models.generateContent({
         model: "gemini-2.0-flash",
-        contents: `${message} is in ${language} read this code and provide hint how to solve the error in this code. Just hint no actual code. Keep is short and simple.If the code is correct tell that it is correct and if possible suggest him how to improve. If not just tell him that code is correct and problem can be with compiler`,
+        contents: `${message} is in ${language} read this code and provide hint how to solve the error in this code. Just hint no actual code. Keep is short and simple.If the code is correct tell that it is correct and if possible suggest him how to improve. If not just tell him that code is correct and problem can be with compiler. Your output should be within 50 words only`,
       });
       console.log(response.text);
       return res.status(200).send({
         message: "Received values and processed with AI",
-        aiRes: response.text,
+        aiResponse: response.text,
     });
   }
   catch (error) {

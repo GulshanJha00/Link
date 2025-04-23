@@ -1,4 +1,6 @@
 "use client";
+
+import Response from "@/components/Response";
 import { Editor } from "@monaco-editor/react";
 import axios from "axios";
 import { HelpCircleIcon, PlayIcon } from "lucide-react";
@@ -14,6 +16,7 @@ const Page = () => {
   const [values, setValues] = useState("");
   const [output] = useState("");
   const [aiRes, setAiRes] = useState("");
+  const [showResponse, setShowResponse] = useState(false);
 
   const [selectedLanguage, setSelectedLanguage] = useState("cpp");
   const debounceTimer = useRef<number | null>(null);
@@ -42,7 +45,6 @@ const Page = () => {
     };
   }, []);
 
-  // Debounced emit to send messages
   const debouncedEmit = useCallback(
     (val: string) => {
       if (debounceTimer.current) {
@@ -51,7 +53,7 @@ const Page = () => {
 
       debounceTimer.current = window.setTimeout(() => {
         socket.emit("chatmessage", { roomId: params.id, message: val });
-      }, 1000); // 1-second debounce time
+      }, 1000);
     },
     [params.id]
   );
@@ -81,8 +83,7 @@ const Page = () => {
         message: values,
         language: selectedLanguage,
       });
-      console.log(response.data.aiRes)
-      setAiRes(response.data.aiRes)
+
       if (response.status === 500) {
         toast.error("Failed to process the AI request", {
           position: "top-center",
@@ -95,6 +96,9 @@ const Page = () => {
         });
         return;
       }
+
+      setAiRes(response.data.aiResponse);
+      setShowResponse(true);
     } catch {
       toast.error("Something Went Wrong", {
         position: "top-center",
@@ -105,31 +109,27 @@ const Page = () => {
         theme: "light",
         transition: Bounce,
       });
-      return;
     }
   };
 
-  // Handle language change from dropdown
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedLanguage(e.target.value); // Update selected language
+    setSelectedLanguage(e.target.value);
   };
 
   return (
     <div className="min-h-screen bg-(--blue) flex flex-col">
       <nav className="bg-gray-950 p-5 shadow-md sticky top-0 z-10 border-b border-gray-800">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
-          {/* Brand Name */}
           <h1 className="text-3xl font-extrabold bg-(--yellow) text-transparent bg-clip-text">
             Lynked
           </h1>
-          {/* Buttons */}
           <div className="space-x-4 flex items-center">
             <select
               className="bg-gray-900 text-white border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 shadow-sm"
               name="language"
               id="language"
-              value={selectedLanguage} // Bind to selectedLanguage state
-              onChange={handleLanguageChange} // Handle change event
+              value={selectedLanguage}
+              onChange={handleLanguageChange}
             >
               <option value="c">C</option>
               <option value="cpp">C++</option>
@@ -142,6 +142,7 @@ const Page = () => {
               <PlayIcon size={18} />
               Run
             </button>
+
             <button
               onClick={handleEvent}
               className="flex cursor-pointer items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-md"
@@ -165,15 +166,15 @@ const Page = () => {
           <Editor
             height="90vh"
             value={values}
-            onChange={handleChange} // Use the value directly here
-            language={selectedLanguage} // Dynamically change the language
-            defaultValue="//Write Code Here"
-            theme="vs-dark" // Dark theme for a clean look
+            onChange={handleChange}
+            language={selectedLanguage}
+            defaultValue="//Write your problem statement in comments for better AI assistance"
+            theme="vs-dark"
             options={{
-              fontSize: 16, // Make font a bit larger for readability
-              lineHeight: 24, // Ensure there's proper spacing between lines
-              automaticLayout: true, // Adjust layout automatically based on the size
-              renderLineHighlight: "none", // Remove extra highlights to keep it clean
+              fontSize: 16,
+              lineHeight: 24,
+              automaticLayout: true,
+              renderLineHighlight: "none",
               scrollbar: {
                 vertical: "auto",
                 horizontal: "auto",
@@ -182,6 +183,11 @@ const Page = () => {
           />
         </div>
       </div>
+
+      {showResponse && aiRes && (
+        <Response message={aiRes} onClose={() => setShowResponse(false)} />
+      )}
+
       <ToastContainer />
     </div>
   );
