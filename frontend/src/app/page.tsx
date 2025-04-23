@@ -37,7 +37,7 @@ const Page = () => {
         </p>
           <button className="bg-[#ED254E] cursor-pointer hover:bg-[#c61d42] text-white px-6 py-2 rounded-md shadow-md transition" onClick={()=>{
             const id = nanoid(6)
-            router.push(`/create/${id}`)
+            router.push(`/${id}`)
             }}>
             Create a New Link
           </button>
