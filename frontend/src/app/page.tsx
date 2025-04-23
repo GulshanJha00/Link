@@ -13,7 +13,6 @@ const Page = () => {
     >
       {/* Background Visuals */}
       <div className="absolute inset-0 z-0">
-      <div className="absolute inset-0 z-0"></div>
         <div
           className="absolute top-0 left-0 w-72 h-72 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse"
           style={{ backgroundColor: 'var(--red)' }}
