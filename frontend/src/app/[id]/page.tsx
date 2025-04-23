@@ -4,6 +4,7 @@ import Response from "@/components/Response";
 import { Editor } from "@monaco-editor/react";
 import axios from "axios";
 import { HelpCircleIcon, PlayIcon } from "lucide-react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { Bounce, toast, ToastContainer } from "react-toastify";
@@ -122,9 +123,11 @@ const Page = () => {
     <div className="min-h-screen bg-(--blue) flex flex-col">
       <nav className="bg-gray-950 p-5 shadow-md sticky top-0 z-10 border-b border-gray-800">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <h1 className="text-3xl font-extrabold bg-(--yellow) text-transparent bg-clip-text">
-            Lynked
-          </h1>
+          <Link href={"/"}>
+            <h1 className="text-3xl font-extrabold bg-(--yellow) text-transparent bg-clip-text">
+              Lynked
+            </h1>
+          </Link>
           <div className="space-x-4 flex items-center">
             <select
               className="bg-gray-900 text-white border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 shadow-sm"
