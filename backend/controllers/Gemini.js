@@ -20,7 +20,7 @@ const gemini = async (req, res) => {
   }
   catch (error) {
     console.error("Error processing AI request:", error);
-    return res.status(500).send({ error: "Failed to process the AI request" });
+    return res.status(500).send({error: "Failed to process the AI request"});
   }
 };
 
