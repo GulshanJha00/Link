@@ -23,7 +23,7 @@ const Features = () => {
             </h3>
             <p className="text-base text-[#F4FFFD]">
               Work together like a freaking team! Code with your friends in
-              real-time without all the usual hassle. Yeah, we're not about that
+              real-time without all the usual hassle. Yeah, we&apos;re not about that
               laggy mess.
             </p>
           </div>
@@ -39,7 +39,7 @@ const Features = () => {
 
             <p className="text-base text-[#F4FFFD]">
               You stuck? Not anymore! Our AI assistant will throw you the best
-              code suggestions ever, like it's reading your mind. You can thank
+              code suggestions ever, like it&apos;s reading your mind. You can thank
               us later.
             </p>
           </div>
@@ -54,7 +54,7 @@ const Features = () => {
             </h3>
             <p className="text-base text-[#F4FFFD]">
               Write code in whatever language you want. C++, Java, JavaScript,
-              Python... We don't care. Code like a true master. No limits, just
+              Python... We don&apos;t care. Code like a true master. No limits, just
               raw power.
             </p>
           </div>
