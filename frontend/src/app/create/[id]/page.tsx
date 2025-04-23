@@ -1,0 +1,127 @@
+"use client";
+
+import { Editor } from "@monaco-editor/react";
+import { useParams } from "next/navigation";
+import React, { useState, useCallback, useRef, useEffect } from "react";
+import { io } from "socket.io-client";
+
+// Establish socket connection
+const socket = io("http://localhost:3001");
+
+const Page = () => {
+  const params = useParams();
+  const [values, setValues] = useState("");
+  const [output, setOutput] = useState(""); 
+  const debounceTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (params.id) {
+      socket.emit("join_room", { roomId: params.id });
+    }
+
+    return () => {
+      if (params.id) {
+        socket.emit("leave_room", { roomId: params.id });
+      }
+    };
+  }, [params.id]); 
+
+  useEffect(() => {
+    const handleNewMessage = (msg:string) => {
+      console.log(msg);
+      setValues(msg);
+    };
+
+    socket.on("new_message", handleNewMessage);
+
+    return () => {
+      socket.off("new_message", handleNewMessage);
+    };
+  }, []); 
+
+  // Debounced emit to send messages
+  const debouncedEmit = useCallback(
+    (val:string) => {
+      if (debounceTimer.current) {
+        clearTimeout(debounceTimer.current);
+      }
+
+      debounceTimer.current = window.setTimeout(() => {
+        socket.emit("chatmessage", { roomId: params.id, message: val });
+        console.log("Emitted:", val);
+      }, 1000); // 1-second debounce time
+    },
+    [params.id]
+  ); 
+
+  const handleChange = (value:string | undefined) => {
+    const safeVal = value ?? "";
+    setValues(safeVal);
+    debouncedEmit(safeVal);
+  };
+
+  const handleRunCode = () => {
+    setTimeout(() => {
+      setOutput(`Output for code: ${values}`); 
+
+    }, 500);
+  };
+
+  // Help button click handler (for Gemini integration)
+  const handleHelpClick = () => {
+    alert("Gemini integration help.");
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-800 flex flex-col">
+      {/* Navbar */}
+      <nav className="bg-gray-900 p-4 shadow-md sticky top-0 z-10">
+        <div className="flex justify-between items-center">
+          <h1 className="text-white text-xl">Cheated - Code Sharing</h1>
+          <div className="space-x-4">
+            <button
+              onClick={handleRunCode}
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            >
+              Run
+            </button>
+            <button
+              onClick={handleHelpClick}
+              className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
+            >
+              Help
+            </button>
+          </div>
+        </div>
+      </nav>
+
+        <div className="w-full  rounded-lg shadow-md">
+          <Editor
+            height="80vh"
+            value={values}
+            onChange={handleChange} // Use the value directly here
+            defaultLanguage="javascript"
+            defaultValue="// Start coding here!"
+            theme="vs-dark" // Dark theme for a clean look
+            options={{
+              fontSize: 16, // Make font a bit larger for readability
+              lineHeight: 24, // Ensure there's proper spacing between lines
+              minimap: { enabled: false }, // Disable minimap to save space
+              automaticLayout: true, // Adjust layout automatically based on the size
+              renderLineHighlight: "none", // Remove extra highlights to keep it clean
+              scrollbar: {
+                vertical: "auto",
+                horizontal: "auto",
+              },
+            }}
+          />
+      </div>
+      <div  className="w-full p-4 bg-gray-900 text-white rounded-lg mb-4">
+        <h2 className="text-lg font-bold">Output:</h2>
+        <pre className="whitespace-pre-wrap break-words">{output}</pre>
+      </div>
+    </div>
+  );
+};
+
+export default Page;
