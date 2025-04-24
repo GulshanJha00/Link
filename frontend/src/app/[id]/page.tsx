@@ -27,6 +27,14 @@ const Page = () => {
       console.log(params.id);
       
       socket.emit("join_room", { roomId: params.id });
+      socket.on("load_existing_code", (code) => {
+        if (code) {
+          setValues(code); 
+        } else {
+          setValues(""); 
+        }
+      });
+      
     }
 
     return () => {
