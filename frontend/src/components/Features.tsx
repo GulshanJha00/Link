@@ -6,7 +6,7 @@ const Features = () => {
   return (
     <section
       id="features"
-      className="h-screen w-screen bg-[#011936] text-white flex items-center justify-center px-6 py-16"
+      className="h-screen border border-gray-700 w-screen bg-[#011936] text-white flex items-center justify-center px-6 py-16"
     >
       <div className="max-w-7xl w-full mx-auto text-center">
         <h2 className="text-4xl font-bold mb-12 text-[#F9DC5C]">
