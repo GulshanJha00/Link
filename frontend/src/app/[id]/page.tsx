@@ -163,6 +163,7 @@ const Page = () => {
         position: "top-center",
         autoClose: 2000,
       });
+      console.log(error)
     }
     setRunProg(false);
   };
