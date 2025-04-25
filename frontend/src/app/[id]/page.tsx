@@ -1,5 +1,4 @@
 "use client";
-
 import Response from "@/components/Response";
 import { Editor } from "@monaco-editor/react";
 import axios from "axios";
@@ -15,26 +14,25 @@ const socket = io("https://cheated-backend.onrender.com");
 const Page = () => {
   const params = useParams();
   const [values, setValues] = useState("");
-  const [output] = useState("");
+  const [output, setOutput] = useState("");
   const [aiRes, setAiRes] = useState("");
   const [showResponse, setShowResponse] = useState(false);
-
   const [selectedLanguage, setSelectedLanguage] = useState("cpp");
   const debounceTimer = useRef<number | null>(null);
+  const [runProg, setRunProg] = useState(false);
 
   useEffect(() => {
     if (params.id) {
       console.log(params.id);
-      
+
       socket.emit("join_room", { roomId: params.id });
       socket.on("load_existing_code", (code) => {
         if (code) {
-          setValues(code); 
+          setValues(code);
         } else {
-          setValues(""); 
+          setValues("");
         }
       });
-      
     }
 
     return () => {
@@ -127,6 +125,48 @@ const Page = () => {
     setSelectedLanguage(e.target.value);
   };
 
+  const handleRunEvent = async () => {
+    setRunProg(true);
+    if (!values) {
+      toast.error("Please Enter Code Before Running", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        theme: "light",
+        transition: Bounce,
+      });
+      return;
+    }
+
+    try {
+      const response = await axios.post("https://cheated-backend.onrender.com/judge0", {
+        source_code: values,
+        language: selectedLanguage,
+      });
+
+      const data = response.data;
+
+      if (data.stdout) {
+        setOutput(data.stdout);
+      } else if (data.stderr) {
+        setOutput(data.stderr);
+      }else if (data.compile_output) {
+        setOutput(data.compile_output);
+      } else {
+        setOutput("Unknown Error Occurred");
+      }
+    } catch (error) {
+      setOutput("Execution Failed");
+      toast.error("Something went wrong!", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    }
+    setRunProg(false);
+  };
+
   return (
     <div className="min-h-screen bg-(--blue) flex flex-col">
       <nav className="bg-gray-950 p-5 shadow-md sticky top-0 z-10 border-b border-gray-800">
@@ -151,10 +191,19 @@ const Page = () => {
               <option value="python">Python</option>
             </select>
 
-            <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-md">
-              <PlayIcon size={18} />
-              Run
-            </button>
+            {runProg ? (
+              <button className="flex items-center gap-2 bg-blue-950 text-white px-4 py-2 rounded-md   transition duration-300 ease-in-out transform  shadow-md">
+                Running...
+              </button>
+            ) : (
+              <button
+                onClick={handleRunEvent}
+                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 shadow-md"
+              >
+                <PlayIcon size={18} />
+                Run
+              </button>
+            )}
 
             <button
               onClick={handleEvent}
@@ -170,9 +219,23 @@ const Page = () => {
       <div className="w-full flex flex-col lg:flex-row-reverse">
         <div className="lg:w-1/3 w-full border border-white p-4 bg-gray-900 text-white mb-4 lg:mb-0">
           <h2 className="text-lg text-(--yellow) font-bold">Output:</h2>
-          <p className="whitespace-pre-wrap border border-white w-full h-[90%] break-words">
-            {output}
-          </p>
+          <div className="bg-[#0f0f0f] rounded-md h-[90%] overflow-y-auto p-4 shadow-inner border border-gray-700">
+            {runProg ? (
+              <p className="text-yellow-400 font-mono animate-pulse">
+                Running code...
+              </p>
+            ) : (
+              <pre
+                className={`whitespace-pre-wrap font-mono text-sm ${
+                  output.includes("error") || output.includes("Exception")
+                    ? "text-red-400"
+                    : "text-green-400"
+                }`}
+              >
+                {output || "// output will appear here"}
+              </pre>
+            )}
+          </div>
         </div>
 
         <div className="lg:w-2/3 w-full border border-white shadow-md">

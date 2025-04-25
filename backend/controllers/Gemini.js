@@ -25,4 +25,3 @@ const gemini = async (req, res) => {
 };
 
 module.exports = gemini;
-
