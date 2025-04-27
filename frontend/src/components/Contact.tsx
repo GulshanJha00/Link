@@ -5,7 +5,7 @@ const ContactUs = () => {
   return (
     <section
       id="contact"
-      className="h-screen border border-gray-700 w-screen bg-[#011936] text-white flex items-center justify-center px-6"
+      className="h-screen  w-screen bg-[#150404] text-white flex items-center justify-center px-6"
     >
       <div className="max-w-3xl w-full text-center">
         <h2 className="text-4xl font-bold text-[#F9DC5C] mb-8">Get in Touch</h2>

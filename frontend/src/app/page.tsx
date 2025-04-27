@@ -1,41 +1,40 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { nanoid } from "nanoid";
 import Navbar from "@/components/Navbar";
 import Features from "@/components/Features";
 import ContactUs from "@/components/Contact";
 import Loader from "@/components/Loader";
+import Footer from "@/components/Footer";
+import Lenis from "lenis";
 
 const Page = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  useEffect(() => {
+    const lenis = new Lenis({autoRaf: true,
+      smoothWheel: true,
+      touchMultiplier: 2,
+      touchInertiaMultiplier: 2,
+
+    })
+  
+    return () => {
+      lenis.destroy()
+    }
+  }, [])
 
   return (
     <>
       <Navbar />
       <div
-        className="min-h-screen border border-gray-700 flex items-center justify-center px-4 relative overflow-hidden"
-        style={{ backgroundColor: "var(--blue)" }}
+        className="min-h-screen  bg-[url('/Background/bg-red.jpg')] bg-cover  flex items-center justify-center px-4 relative overflow-hidden"
       >
-        {/* Background Visuals */}
-        <div className="absolute inset-0 z-0">
-          <div
-            className="absolute top-0 left-0 w-72 h-72 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse"
-            style={{ backgroundColor: "var(--red)" }}
-          />
-          <div
-            className="absolute bottom-0 right-0 w-72 h-72 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse delay-1000"
-            style={{ backgroundColor: "var(--yellow)" }}
-          />
-          <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-500"
-            style={{ backgroundColor: "var(--charcoal)" }}
-          />
-        </div>
+        <div className="bg-[#150404]/30 absolute inset-0  "></div>
 
         {/* Content */}
-        <div className="z-10 space-y-8 text-center text-white max-w-4xl mx-auto">
+        <div className="z-10 space-y-8 text-center  text-white max-w-4xl mx-auto">
           <h1
             className="text-6xl md:text-7xl font-extrabold drop-shadow-charcoal animate-flicker mb-0"
             style={{
@@ -83,6 +82,8 @@ const Page = () => {
 
       {/* Contact Us Section */}
       <ContactUs />
+      <Footer/>
+
     </>
   );
 };

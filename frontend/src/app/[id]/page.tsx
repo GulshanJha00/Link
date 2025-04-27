@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 import Response from "@/components/Response";
 import { Editor } from "@monaco-editor/react";
 import axios from "axios";
@@ -170,7 +171,7 @@ const Page = () => {
 
   return (
     <div className="min-h-screen bg-(--blue) flex flex-col">
-      <nav className="bg-gray-950 p-5 shadow-md sticky top-0 z-10 border-b border-gray-800">
+      <nav className="bg-[#150404]/40  p-5 shadow-md sticky top-0 z-10 border-b">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <Link href={"/"}>
             <h1 className="text-3xl font-extrabold bg-(--yellow) text-transparent bg-clip-text">
@@ -266,6 +267,8 @@ const Page = () => {
       )}
 
       <ToastContainer />
+      <Footer/>
+
     </div>
   );
 };
