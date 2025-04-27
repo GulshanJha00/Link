@@ -5,15 +5,14 @@ const Footer = () => {
   return (
     <footer className="bg-[#150404]/95 border-t border-t-red-400/30 text-white py-8 ">
       <div className="max-w-screen-xl mx-auto  flex justify-between items-center">
-        {/* Left side: Company Info */}
-        <div>
+        <header>
           <p className="text-lg font-semibold text-[#F9DC5C]">Cheated.xyz</p>
           <p className="text-sm text-gray-400 mt-2">
             &copy; {new Date().getFullYear()} All rights... and I mean ALL rights reserved.
           </p>
-        </div>
+        </header>
 
-        <div className="flex space-x-8 -ml-40">
+        <main className="flex space-x-8 -ml-40">
         <Link href="#" className="text-gray-400 hover:text-white transition duration-300">Home</Link>
 
           <Link href="/sitecraft" className="text-gray-400 hover:text-white transition duration-300">SiteCraft</Link>
@@ -21,10 +20,10 @@ const Footer = () => {
 
           <Link href="#features" className="text-gray-400 hover:text-white transition duration-300">Features</Link>
           <Link href="#contact" className="text-gray-400 hover:text-white transition duration-300">Contact</Link>
-        </div>
+        </main>
 
         {/* Right side: Social Icons */}
-        <div className="flex space-x-6">
+        <section className="flex space-x-6">
           <Link
             href="https://github.com/GulshanJha00"
             target="_blank"
@@ -49,7 +48,7 @@ const Footer = () => {
           >
             <FaLinkedin size={20} />
           </Link>
-        </div>
+        </section>
       </div>
 
       {/* Footer Bottom: Quick Info */}

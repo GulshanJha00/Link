@@ -8,33 +8,53 @@ import ContactUs from "@/components/Contact";
 import Loader from "@/components/Loader";
 import Footer from "@/components/Footer";
 import Lenis from "lenis";
+import Head from "next/head";
 
 const Page = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   useEffect(() => {
-    const lenis = new Lenis({autoRaf: true,
+    const lenis = new Lenis({
+      autoRaf: true,
       smoothWheel: true,
       touchMultiplier: 2,
       touchInertiaMultiplier: 2,
+    });
 
-    })
-  
     return () => {
-      lenis.destroy()
-    }
-  }, [])
+      lenis.destroy();
+    };
+  }, []);
 
   return (
     <>
+      <Head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
+        <title>Cheated | Share Code Instantly</title>
+        <meta
+          name="description"
+          content="Create a link to share your code instantly with colleagues and friends. Clean, fast, and developer-first."
+        />
+        <meta
+          name="keywords"
+          content="instant website creation, AI website generator, free website builder, website maker, create website with AI, AI site crafting, code sharing platform, code runner, share code online, collaborate on code, instant code sharing, programming, developer tools, AI-powered site builder, prompt-based site creation, fast website design, rapid website building, code execution, real-time code execution, coding collaboration, web development tools, developer-first tools, share your code instantly, online code editor, website builder for developers, site crafting with AI, code collaboration platform, instant code playground, free code sharing, tech tools for developers, cheated, cheatedVercel, Cheatxyz,cheatedxyz, cheated, sitecraft, site craft, sitecrafter, site-crafter, cheated.xyz, cheated"
+        />
+
+        <meta property="og:title" content="Cheated | Share Code Instantly" />
+        <meta
+          property="og:description"
+          content="Create a link to share your code instantly with colleagues and friends. Fast, developer-first, and built for efficiency."
+        />
+        <meta property="og:url" content="https://cheated.vercel.app" />
+      </Head>
       <Navbar />
-      <div
-        className="min-h-screen w-screen bg-[#150404] bg-[url('/Background/bg-red.jpg')] bg-cover  flex items-center justify-center relative overflow-hidden"
-      >
+      <div className="min-h-screen w-screen bg-[#150404] bg-[url('/Background/bg-red.jpg')] bg-cover  flex items-center justify-center relative overflow-hidden">
         <div className="bg-[#150404]/30 absolute inset-0  "></div>
 
         {/* Content */}
-        <div className="z-10 space-y-8 text-center  text-white max-w-4xl mx-auto">
+        <header className="z-10 space-y-8 text-center  text-white max-w-4xl mx-auto">
           <h1
             className="text-6xl md:text-7xl font-extrabold drop-shadow-charcoal animate-flicker mb-0"
             style={{
@@ -74,7 +94,7 @@ const Page = () => {
               </button>
             )}
           </div>
-        </div>
+        </header>
       </div>
 
       {/* Features Section */}
@@ -82,8 +102,7 @@ const Page = () => {
 
       {/* Contact Us Section */}
       <ContactUs />
-      <Footer/>
-
+      <Footer />
     </>
   );
 };

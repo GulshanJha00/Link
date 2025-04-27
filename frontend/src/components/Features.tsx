@@ -4,11 +4,11 @@ import { FaRegHandshake, FaBrain, FaCode } from "react-icons/fa"; // Adding icon
 
 const Features = () => {
   return (
-    <section
+    <main
       id="features"
       className="h-1/2  w-screen bg-[#150404] text-white flex items-center justify-center px-6 py-16"
     >
-      <div className="max-w-7xl w-full mx-auto text-center">
+      <section className="max-w-7xl w-full mx-auto text-center">
         <h2 className="text-4xl font-bold mb-12 text-[#F9DC5C]">
           The Features That Will Blow Your Mind
         </h2>
@@ -59,8 +59,8 @@ const Features = () => {
             </p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 };
 
