@@ -29,7 +29,7 @@ const Page = () => {
     <>
       <Navbar />
       <div
-        className="min-h-screen  bg-[url('/Background/bg-red.jpg')] bg-cover  flex items-center justify-center px-4 relative overflow-hidden"
+        className="min-h-screen w-screen bg-[#150404] bg-[url('/Background/bg-red.jpg')] bg-cover  flex items-center justify-center relative overflow-hidden"
       >
         <div className="bg-[#150404]/30 absolute inset-0  "></div>
 
