@@ -29,7 +29,7 @@ Cheated is a real-time **code-sharing platform** that allows users to share code
 - Judge0 API
 - Gemini AI Integration (for code suggestions)
 
----## 📦 Installation
+## 📦 Installation
 
 ### 🖥️ Frontend
 
