@@ -1,6 +1,6 @@
-# Cheated
+# Lynked
 
-Cheated is a real-time **code-sharing platform** that allows users to share code instantly with others. Built for students, developers, and collaborators, it also integrates **AI-based debugging** using Gemini AI to help users understand or fix code on the fly.
+Lynked is a real-time **code-sharing platform** that allows users to share code instantly with others. Built for students, developers, and collaborators, it also integrates **AI-based debugging** using Gemini AI to help users understand or fix code on the fly.
 
 ---
 
@@ -34,8 +34,8 @@ Cheated is a real-time **code-sharing platform** that allows users to share code
 ### 🖥️ Frontend
 
 ```bash
-git clone https://github.com/GulshanJha00/Link.git
-cd Link/frontend
+git clone https://github.com/GulshanJha00/Linked.git
+cd Linked/frontend
 npm install --force
 npm run dev
 cd ../backend
